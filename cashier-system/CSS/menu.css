@@ -1,0 +1,118 @@
+/* css/menu.css
+   The side menu and page layout, shared by EVERY page (Bootstrap pages and older pages).
+   It is loaded last, so the menu looks the same everywhere. Edit the menu here only. */
+
+body { background: #f3f4f6; }
+
+/* ---------- Page layout ---------- */
+.app-shell { display: flex; min-height: 100vh; }
+.main-content { flex: 1; min-width: 0; padding: 24px; }
+
+/* ---------- Side menu ---------- */
+.sidenav {
+    width: 230px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 12px;
+    background: transparent;   /* no color: the page background shows through */
+    border-right: 1px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+.sidenav__brand {
+    display: flex;            /* puts the logo and the name side by side */
+    align-items: center;
+    gap: 10px;
+    color: #1f2937;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 8px 12px 20px;
+}
+
+/* Menu button: gray icon square on the left, label on the right. */
+.nav-btn {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 8px;
+    color: #495057;
+    text-decoration: none;
+    border: 1px solid #6c757d;   /* outline button: gray border, no fill */
+    border-radius: 6px;
+    overflow: hidden;
+}
+.nav-btn:hover { color: #fff; }   /* Bootstrap would turn linked text blue on hover */
+.nav-btn__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 52px;
+    background: #525252;
+}
+.nav-btn__icon img { width: 30px; height: 30px; object-fit: contain; }
+.nav-btn__label {
+    flex: 1;
+    padding: 14px 10px;
+    background: transparent;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.nav-btn:hover { color: #fff; }
+.nav-btn:hover .nav-btn__label { background: #6c757d; }   /* fills in on hover */
+.nav-btn.is-active { color: #fff; }
+.nav-btn.is-active .nav-btn__label { background: #6c757d; }   /* the page you are on */
+
+/* Logged-in user box at the bottom of the menu. */
+.sidenav__user {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 12px;
+    border-top: 1px solid #dee2e6;
+    color: #495057;
+    font-size: 13px;
+}
+.sidenav__user-name { font-weight: bold; color: #212529; }
+.sidenav__logout {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    background: #6b7280;
+    color: #fff;
+    font-size: 12px;
+    text-decoration: none;
+}
+.sidenav__logout:hover { background: #4b5563; color: #fff; }
+
+/* On small screens the menu goes on top. */
+@media (max-width: 700px) {
+    .app-shell { flex-direction: column; }
+    .sidenav {
+        width: 100%;
+        height: auto;
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .sidenav__brand { width: 100%; padding-bottom: 8px; }
+    .nav-btn { flex: 1 1 150px; }
+    .sidenav__user { margin-top: 0; width: 100%; }
+}
+
+/* Menu icon fallback: a letter, shown when the image file is missing. */
+.nav-btn__fallback { color: #fff; font-weight: bold; font-size: 20px; }
+
+/* Logo beside the name at the top of the side menu. */
+.sidenav__logo { width: 36px; height: 36px; object-fit: contain; flex-shrink: 0; }
+
+/* Built-in icons (see includes/icons.php). */
+.icon { flex-shrink: 0; vertical-align: -0.2em; }
+.nav-btn__svg { color: #fff; }   /* the icon shown in the gray square when there is no image file */

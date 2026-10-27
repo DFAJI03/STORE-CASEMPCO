@@ -1,0 +1,146 @@
+/* css/app.css
+   Layout and side menu for the pages that use Bootstrap.
+   bootstrap.min.css is loaded BEFORE this file, so these rules can adjust it. */
+
+body { background: #f3f4f6; }
+
+/* ---------- Page layout ---------- */
+.app-shell { display: flex; min-height: 100vh; }
+.main-content { flex: 1; min-width: 0; padding: 24px; }
+
+/* ---------- Side menu ---------- */
+.sidenav {
+    width: 230px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 12px;
+    background: transparent;   /* no color: the page background shows through */
+    border-right: 1px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+.sidenav__brand {
+    display: flex;            /* puts the logo and the name side by side */
+    align-items: center;
+    gap: 10px;
+    color: #1f2937;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 8px 12px 20px;
+}
+
+/* Menu button: gray icon square on the left, label on the right. */
+.nav-btn {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 8px;
+    color: #495057;
+    text-decoration: none;
+    border: 1px solid #6c757d;   /* outline button: gray border, no fill */
+    border-radius: 6px;
+    overflow: hidden;
+}
+.nav-btn:hover { color: #fff; }   /* Bootstrap would turn linked text blue on hover */
+.nav-btn__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 52px;
+    background: #525252;
+}
+.nav-btn__icon img { width: 30px; height: 30px; object-fit: contain; }
+.nav-btn__label {
+    flex: 1;
+    padding: 14px 10px;
+    background: transparent;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.nav-btn:hover { color: #fff; }
+.nav-btn:hover .nav-btn__label { background: #6c757d; }   /* fills in on hover */
+.nav-btn.is-active { color: #fff; }
+.nav-btn.is-active .nav-btn__label { background: #6c757d; }   /* the page you are on */
+
+/* Logged-in user box at the bottom of the menu. */
+.sidenav__user {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 12px;
+    border-top: 1px solid #dee2e6;
+    color: #495057;
+    font-size: 13px;
+}
+.sidenav__user-name { font-weight: bold; color: #212529; }
+.sidenav__logout {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 6px;
+    background: #6b7280;
+    color: #fff;
+    font-size: 12px;
+    text-decoration: none;
+}
+.sidenav__logout:hover { background: #4b5563; color: #fff; }
+
+/* On small screens the menu goes on top. */
+@media (max-width: 700px) {
+    .app-shell { flex-direction: column; }
+    .sidenav {
+        width: 100%;
+        height: auto;
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .sidenav__brand { width: 100%; padding-bottom: 8px; }
+    .nav-btn { flex: 1 1 150px; }
+    .sidenav__user { margin-top: 0; width: 100%; }
+}
+
+/* Menu icon fallback: a letter, shown when the image file is missing. */
+.nav-btn__fallback { color: #fff; font-weight: bold; font-size: 20px; }
+
+/* ---------- Glass buttons ----------
+   Use:  class="btn btn-glass glass-success"   (also glass-primary, glass-warning, glass-secondary)
+   A see-through tint, a thin light border, a soft shine on top, and a blur of whatever is behind. */
+.btn-glass {
+    --tint: 108, 117, 125;      /* the color of the glass, as red, green, blue */
+    --ink: #343a40;             /* the text color */
+    background: rgba(var(--tint), 0.18);
+    border: 1px solid rgba(var(--tint), 0.5);
+    border-radius: 10px;
+    color: var(--ink);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    backdrop-filter: blur(8px) saturate(160%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 2px 8px rgba(var(--tint), 0.25);
+    transition: background 0.15s, transform 0.15s;
+}
+.btn-glass:hover {
+    background: rgba(var(--tint), 0.32);
+    border-color: rgba(var(--tint), 0.6);
+    color: var(--ink);
+    transform: translateY(-1px);
+}
+.btn-glass:active,
+.btn-glass:focus-visible {
+    background: rgba(var(--tint), 0.4) !important;
+    border-color: rgba(var(--tint), 0.7) !important;
+    color: var(--ink) !important;
+}
+.btn-glass.glass-success   { --tint: 25, 135, 84;   --ink: #0f5132; }
+.btn-glass.glass-primary   { --tint: 13, 110, 253;  --ink: #084298; }
+.btn-glass.glass-warning   { --tint: 255, 193, 7;   --ink: #664d03; }
+.btn-glass.glass-secondary { --tint: 108, 117, 125; --ink: #343a40; }
+
+/* Logo beside the name at the top of the side menu. */
+.sidenav__logo { width: 36px; height: 36px; object-fit: contain; flex-shrink: 0; }
